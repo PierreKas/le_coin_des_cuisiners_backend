@@ -1,4 +1,4 @@
-package coin.cuisiniers.dashboard_backend.controller;
+package com.coin_des_cuisinier.Le.coin.des.cuisiniers.Backend.controller;
 
 import com.coin_des_cuisinier.Le.coin.des.cuisiniers.Backend.model.Transaction;
 import com.coin_des_cuisinier.Le.coin.des.cuisiniers.Backend.service.TransactionService;
