@@ -15,4 +15,7 @@ public interface ProductRepository extends JpaRepository<Product,Integer> {
     @Query("SELECT p FROM Product p where remainingQuantity=0")
     List<Product> findOutOfStockProducts();
 
+    @Query("SELECT p FROM Product p where productCode=?1")
+    Product findProductByCode(String prodCode);
+
 }

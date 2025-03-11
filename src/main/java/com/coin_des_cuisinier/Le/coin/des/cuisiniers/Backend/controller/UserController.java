@@ -1,4 +1,4 @@
-package coin.cuisiniers.dashboard_backend.controller;
+package com.coin_des_cuisinier.Le.coin.des.cuisiniers.Backend.controller;
 
 import com.coin_des_cuisinier.Le.coin.des.cuisiniers.Backend.model.User;
 import com.coin_des_cuisinier.Le.coin.des.cuisiniers.Backend.service.UserService;
@@ -22,5 +22,7 @@ public class UserController {
         List<User> userList= userService.getAllUsers();
         return new  ResponseEntity<>(userList,HttpStatus.OK);
     }
+
+
 
 }
