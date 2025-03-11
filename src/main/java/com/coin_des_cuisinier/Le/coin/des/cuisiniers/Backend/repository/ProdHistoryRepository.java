@@ -9,6 +9,6 @@ import java.util.List;
 
 @Repository
 public interface ProdHistoryRepository extends JpaRepository<ProductHistory,Integer> {
-   @Query("SELECT h FROM ProductHistory h WHERE productCode=?1")
+   @Query("SELECT h FROM ProductHistory h WHERE productCode=?1 ORDER BY newPurchasedDate DESC")
     public List<ProductHistory> findHistoryByCode(String productCode);
 }

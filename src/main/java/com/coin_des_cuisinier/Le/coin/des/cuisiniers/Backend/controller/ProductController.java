@@ -98,7 +98,7 @@ public class ProductController {
     public ResponseEntity<String> deleteProduct(@PathVariable int productId){
         try {
             productService.deleteProduct(productId);
-            return new ResponseEntity<>("User deleted successfully", HttpStatus.OK);
+            return new ResponseEntity<>("Product deleted successfully", HttpStatus.OK);
         } catch (Exception e) {
             log.error("error ", e);
 

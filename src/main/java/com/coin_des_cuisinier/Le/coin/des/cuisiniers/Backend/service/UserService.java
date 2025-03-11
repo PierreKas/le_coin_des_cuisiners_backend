@@ -16,13 +16,15 @@ public class UserService {
     public List<User> getAllUsers(){
         return userRepository.findAll();
     }
-
+    public User addUser(User user){
+        return userRepository.save(user);
+    }
     public Optional<User> findUserById(int id){
         Optional<User> user= userRepository.findById(id);
         return user;
     }
 
-    public User updateProduct(int userId,User updatedUser){
+    public User updateUser(int userId,User updatedUser){
         Optional<User> existingUser = userRepository.findById(userId);
         if (existingUser.isPresent()){
             User user = existingUser.get();
