@@ -1,5 +1,7 @@
 package com.coin_des_cuisinier.Le.coin.des.cuisiniers.Backend.service;
 
+import com.coin_des_cuisinier.Le.coin.des.cuisiniers.Backend.dto.LoginRequest;
+import com.coin_des_cuisinier.Le.coin.des.cuisiniers.Backend.dto.LoginResponse;
 import com.coin_des_cuisinier.Le.coin.des.cuisiniers.Backend.model.User;
 import com.coin_des_cuisinier.Le.coin.des.cuisiniers.Backend.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,4 +50,30 @@ public class UserService {
 
         userRepository.deleteById(id);
     }
+
+    public LoginResponse login(LoginRequest loginRequest){
+        User user= userRepository.findByPhoneNumber(loginRequest.getPhoneNumber()).orElseThrow(()-> new RuntimeException("Phone number not found"));
+        if (loginRequest.getPassword()!=user.getPassword()){
+            throw new RuntimeException("Invalid password");
+        }
+
+        if ("NON APPROUVE".equals(user.getUserStatus())){
+            throw new RuntimeException("Blocked account");
+        }
+        LoginResponse response=new LoginResponse();
+        response.setId(user.getId());
+        response.setUserStatus(user.getUserStatus());
+        response.setEmail(user.getEmail());
+        response.setAddress(user.getAddress());
+        response.setRole(user.getRole());
+        response.setFullName(user.getFullName());
+        response.setPhoneNumber(user.getPhoneNumber());
+        response.setPassword(user.getPassword());
+
+        return response;
+
+
+    }
+
+
 }
