@@ -55,7 +55,7 @@ public class UserService {
     public LoginResponse login(LoginRequest loginRequest){
         User user= userRepository.findByPhoneNumber(loginRequest.getPhoneNumber()).orElseThrow(()-> new RuntimeException("Phone number not found"));
         if (!Objects.equals(loginRequest.getPassword(), user.getPassword())){
-            throw new RuntimeException("Invalid password "+loginRequest.getPassword()+" true password"+user.getPassword());
+            throw new RuntimeException("Invalid password ");//+loginRequest.getPassword()+" true password"+user.getPassword()
         }
 
         if ("NON APPROUVE".equals(user.getUserStatus())){
