@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/transactions")
@@ -29,5 +31,30 @@ public class TransactionController {
     public ResponseEntity<List<Transaction>> getTransactionsByDate(@PathVariable String theDate){
         List<Transaction> transactionListByDate= transactionService.getTransactionsByDate(theDate);
         return new ResponseEntity<>(transactionListByDate, HttpStatus.OK);
+    }
+
+    @PostMapping("/batch")
+    public ResponseEntity<?> saveTransactionBatch(@RequestBody List<Transaction> transactions) {
+        try {
+            String billCode = transactionService.saveTransactionBatch(transactions);
+
+            Map<String, String> response = new HashMap<>();
+            response.put("status", "success");
+            response.put("message", "Marchandise(s) vendue(s)");
+            response.put("billCode", billCode);
+
+            return new ResponseEntity<>(response, HttpStatus.CREATED);
+        } catch (Exception e) {
+            Map<String, String> errorResponse = new HashMap<>();
+            errorResponse.put("status", "error");
+            errorResponse.put("message", e.getMessage());
+
+            HttpStatus status = HttpStatus.BAD_REQUEST;
+            if (e.getMessage().contains("Le stock n'est pas suffisant")) {
+                errorResponse.put("message", "Le stock n'est pas suffisant");
+            }
+
+            return new ResponseEntity<>(errorResponse, status);
+        }
     }
 }

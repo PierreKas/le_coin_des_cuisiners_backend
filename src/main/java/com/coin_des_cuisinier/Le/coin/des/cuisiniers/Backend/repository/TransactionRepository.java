@@ -11,4 +11,5 @@ import java.util.List;
 public interface TransactionRepository extends JpaRepository<Transaction,Integer> {
     @Query("SELECT t FROM Transaction t WHERE sellingDate LIKE?1 || '%'")
     public List<Transaction> findTransationsByDate(String theDate);
+
 }
