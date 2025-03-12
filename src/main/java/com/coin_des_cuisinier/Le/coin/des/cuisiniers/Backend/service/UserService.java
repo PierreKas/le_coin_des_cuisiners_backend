@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -53,8 +54,8 @@ public class UserService {
 
     public LoginResponse login(LoginRequest loginRequest){
         User user= userRepository.findByPhoneNumber(loginRequest.getPhoneNumber()).orElseThrow(()-> new RuntimeException("Phone number not found"));
-        if (loginRequest.getPassword()!=user.getPassword()){
-            throw new RuntimeException("Invalid password");
+        if (!Objects.equals(loginRequest.getPassword(), user.getPassword())){
+            throw new RuntimeException("Invalid password "+loginRequest.getPassword()+" true password"+user.getPassword());
         }
 
         if ("NON APPROUVE".equals(user.getUserStatus())){
