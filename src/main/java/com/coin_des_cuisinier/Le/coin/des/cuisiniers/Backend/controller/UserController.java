@@ -18,7 +18,7 @@ import java.util.Optional;
 @Slf4j
 @RestController
 @RequestMapping("/api/users")
-@CrossOrigin(origins = "*", methods = {RequestMethod.GET})
+@CrossOrigin(origins = "*", methods = {RequestMethod.POST, RequestMethod.GET, RequestMethod.PUT,RequestMethod.DELETE})
 public class UserController {
     @Autowired
     public UserService userService;
