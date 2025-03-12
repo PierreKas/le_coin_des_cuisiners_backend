@@ -1,5 +1,7 @@
 package com.coin_des_cuisinier.Le.coin.des.cuisiniers.Backend.controller;
 
+import com.coin_des_cuisinier.Le.coin.des.cuisiniers.Backend.dto.LoginRequest;
+import com.coin_des_cuisinier.Le.coin.des.cuisiniers.Backend.dto.LoginResponse;
 import com.coin_des_cuisinier.Le.coin.des.cuisiniers.Backend.model.Product;
 import com.coin_des_cuisinier.Le.coin.des.cuisiniers.Backend.model.User;
 import com.coin_des_cuisinier.Le.coin.des.cuisiniers.Backend.service.UserService;
@@ -73,6 +75,12 @@ public class UserController {
 
             return null;
         }
+    }
+
+    @PostMapping(value = "/login", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<LoginResponse> login(@RequestBody LoginRequest loginRequest) {
+        LoginResponse loginResponse = userService.login(loginRequest);
+        return new ResponseEntity<>(loginResponse, HttpStatus.OK);
     }
 
 }
