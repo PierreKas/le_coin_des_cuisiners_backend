@@ -34,7 +34,7 @@ public class ProductService {
 //            }
 //        }
 
-        if(productRepository.isProductCodeExist(product.getProductCode())){
+        if(productRepository.existsByProductCode(product.getProductCode())){
             throw new RuntimeException("Product code exists");
         }
         return productRepository.save(product);

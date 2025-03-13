@@ -18,6 +18,6 @@ public interface ProductRepository extends JpaRepository<Product,Integer> {
     @Query("SELECT p FROM Product p where productCode=?1")
     Product findProductByCode(String prodCode);
 
-    boolean isProductCodeExist(String productCode);
+    boolean existsByProductCode(String productCode);
 
 }
