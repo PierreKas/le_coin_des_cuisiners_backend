@@ -19,10 +19,11 @@ public class TransactionService {
     public TransactionRepository transactionRepository;
     @Autowired
     public ProductRepository productRepository;
-
+    @Transactional
     public List<Transaction> getAllTransactions (){
         return transactionRepository.findAll();
     }
+    @Transactional
     public List<Transaction> getTransactionsByDate (String theDate){
         return transactionRepository.findTransationsByDate(theDate);
     }

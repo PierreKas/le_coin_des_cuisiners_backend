@@ -6,6 +6,7 @@ import com.coin_des_cuisinier.Le.coin.des.cuisiniers.Backend.model.User;
 import com.coin_des_cuisinier.Le.coin.des.cuisiniers.Backend.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Objects;
@@ -15,18 +16,20 @@ import java.util.Optional;
 public class UserService {
     @Autowired
     public UserRepository userRepository;
-
+    @Transactional
     public List<User> getAllUsers(){
         return userRepository.findAll();
     }
+    @Transactional
     public User addUser(User user){
         return userRepository.save(user);
     }
+    @Transactional
     public Optional<User> findUserById(int id){
         Optional<User> user= userRepository.findById(id);
         return user;
     }
-
+    @Transactional
     public User updateUser(int userId,User updatedUser){
         Optional<User> existingUser = userRepository.findById(userId);
         if (existingUser.isPresent()){
@@ -46,12 +49,12 @@ public class UserService {
         }
 
     }
-
+    @Transactional
     public void deleteUser(int id){
 
         userRepository.deleteById(id);
     }
-
+    @Transactional
     public LoginResponse login(LoginRequest loginRequest){
         User user= userRepository.findByPhoneNumber(loginRequest.getPhoneNumber()).orElseThrow(()-> new RuntimeException("Phone number not found"));
         if (!Objects.equals(loginRequest.getPassword(), user.getPassword())){
@@ -75,6 +78,4 @@ public class UserService {
 
 
     }
-
-
 }
