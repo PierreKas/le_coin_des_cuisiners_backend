@@ -61,6 +61,7 @@ public class ProductController {
     @PostMapping(value = "/add", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Product> addProduct(@RequestBody Product product){
         try {
+
             Product savedProduct = productService.addProduct(product);
             return new  ResponseEntity<>(savedProduct, HttpStatus.CREATED);
         } catch (Exception e) {
@@ -84,6 +85,18 @@ public class ProductController {
 
     @PutMapping(value = "/update/{productId}",consumes = MediaType.APPLICATION_JSON_VALUE,produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Product> updateProduct(@PathVariable int productId, @RequestBody Product product){
+        try {
+            Product updatedProduct = productService.updateProduct(productId, product);
+            return new ResponseEntity<>(updatedProduct, HttpStatus.OK);
+        } catch (Exception e) {
+            log.error("error ", e);
+
+            return null;
+        }
+    }
+
+    @PutMapping(value = "/restock/{productId}",consumes = MediaType.APPLICATION_JSON_VALUE,produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Product> restockProduct(@PathVariable int productId, @RequestBody Product product){
         try {
             Product updatedProduct = productService.updateProduct(productId, product);
             return new ResponseEntity<>(updatedProduct, HttpStatus.OK);
