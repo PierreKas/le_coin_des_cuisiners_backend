@@ -39,7 +39,7 @@ public class UserService {
             user.setPhoneNumber(updatedUser.getPhoneNumber());
             user.setPassword(updatedUser.getPassword());
 
-            return userRepository.save(updatedUser);
+            return userRepository.save(user);
 
         }else {
             return null;

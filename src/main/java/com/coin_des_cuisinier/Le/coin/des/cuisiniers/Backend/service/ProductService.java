@@ -44,7 +44,7 @@ public class ProductService {
          product.setRemainingQuantity(updatedProduct.getRemainingQuantity());
          product.setSellingPrice(updatedProduct.getSellingPrice());
 
-          return productRepository.save(updatedProduct);
+          return productRepository.save(product);
 
       }else {
           return null;
