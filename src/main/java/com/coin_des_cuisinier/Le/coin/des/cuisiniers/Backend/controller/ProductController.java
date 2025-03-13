@@ -70,7 +70,7 @@ public class ProductController {
 
     }
 
-    @GetMapping("/by-code")
+    @GetMapping("/by-code/{code}")
     public ResponseEntity<Product> findProductByCode(@PathVariable String code){
         try {
             Product productInfo= productService.findProductByCode(code);
